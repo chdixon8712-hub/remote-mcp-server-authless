@@ -1,0 +1,24 @@
+{
+  "name": "Booking Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "from": "{{workflow.variables.twilio_number}}",
+        "to": "{{customer.phone}}",
+        "message": "Thank you for your booking, {{customer.name}}!"
+      },
+      "name": "Send SMS",
+      "type": "Twilio"
+    },
+    {
+      "parameters": {
+        "eventType": "create",
+        "calendarId": "primary",
+        "dateTime": "{{customer.date}} {{customer.time}}",
+        "summary": "Booking with {{customer.name}}"
+      },
+      "name": "Add Calendar Event",
+      "type": "Google Calendar"
+    }
+  ]
+}
